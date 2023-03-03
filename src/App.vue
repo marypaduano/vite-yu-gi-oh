@@ -1,0 +1,25 @@
+<script>
+import Header from './components/Header.vue'
+// import Main from './components/Main.vue'
+import GameCard from './components/GameCards.vue';
+
+
+export default {
+  components: {
+    Header,
+    GameCard,
+  }
+}
+</script>
+
+
+
+<template>
+  <Header  />
+  <GameCard />
+
+</template>
+
+<style lang="scss" >
+@use './style/general.scss';
+</style>
