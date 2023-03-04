@@ -1,13 +1,13 @@
 <script>
 import Header from './components/Header.vue'
-// import Main from './components/Main.vue'
-import GameCard from './components/GameCards.vue';
+import Main from './components/Main.vue'
+// import GameCard from './components/GameCards.vue';
 
 
 export default {
   components: {
     Header,
-    GameCard,
+    Main,
   }
 }
 </script>
@@ -16,7 +16,7 @@ export default {
 
 <template>
   <Header  />
-  <GameCard />
+  <Main  />
 
 </template>
 

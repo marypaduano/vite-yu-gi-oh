@@ -1,11 +1,8 @@
 <template>
     <main class="main">
         <div class="container">
-            <ul class="card">
-                <li class="card" v-for="card in cards" :key="card.id">
-                    <img :src="card.card_image.image_url" alt="">
-                    <h3 class="card_archetype">{{ card.archetype }}</h3>
-                </li>
+            <ul class="cards">                
+                <GameCards v-for="element in store.cards" :key="element.id" :card="element" />
             </ul>
         </div>
     </main>
@@ -14,22 +11,35 @@
 <script>
 import axios from 'axios'
 import store from '../store'
+import GameCards from './GameCards.vue'
 
 export default {
+    components: {
+      GameCards
+    },
 
     data() {
         return {
             cards: [],
-            store,
+            store: store
         }
     },
+
+    computed: {
+      cardsGame() {
+        return this.store.cards
+      }
+    },
+
+   
 
     methods: {
         fetchCards() {
             axios
                 .get('https://db.ygoprodeck.com/api/v7/cardinfo.php?num=20&offset=0')
-                .then((res) => {
+                .then((res) => {                
                     this.store.cards = res.data.data
+                    
                 })
         }
     },
@@ -38,3 +48,11 @@ export default {
     },
 }
 </script>
+
+<style lang="scss" scoped>
+.cards {
+  display: grid;
+  gap: 30px;
+  grid-template-columns: repeat(6,1fr);
+}
+</style>
