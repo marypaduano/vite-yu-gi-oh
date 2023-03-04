@@ -62,6 +62,6 @@ console.log(store.image)
 .cards {
   display: grid;
   gap: 10px;
-  grid-template-columns: repeat(6,1fr);
+  grid-template-columns: repeat(5,1fr);
 }
 </style>
