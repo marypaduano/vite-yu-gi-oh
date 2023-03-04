@@ -57,7 +57,7 @@ console.log(store.image)
     background-image: url('../img/wallpaper.jpg');
     background-repeat: no-repeat;
     background-size: cover;
-    padding-top: 80px;
+    padding: 80px 0;
 }
 .cards {
   display: grid;
