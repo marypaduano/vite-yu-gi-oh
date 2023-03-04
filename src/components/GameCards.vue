@@ -1,6 +1,6 @@
 <template>
     <li class="card">
-      <img :src="card.image_url" alt="">
+      <img :src="card.card_images[0].image_url" alt="">
       <h4 class="card_name">{{ card.name }}</h4>
       <span class="archetype">{{ card.archetype }}</span>
     </li>
@@ -13,8 +13,10 @@
         type: Object,
         required: true
       },
+    
     }
   }
+
 </script>
 
 <style lang="scss" scoped>
@@ -22,7 +24,6 @@
   text-align: center;
   background-color: goldenrod;
   font-size: 15px;
-  padding: 10px;
 }
 
 .card_name{

@@ -10,7 +10,8 @@
 
 <style lang="scss" scoped>
 header {
-    padding: 80px 0;
+    padding: 30px 0;
     text-transform: uppercase;
+    background-color: goldenrod;
 }
 </style>
