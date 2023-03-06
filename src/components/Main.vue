@@ -1,13 +1,15 @@
 <template>
     <main class="main">
-    <div class="container">
-      <Filters @onSearch="fetchCards"/>
-    </div>
         <div class="container">
-            <ul class="cards">                
+            <Filters @onSearch="fetchCards" />
+        </div>
+        <div class="container">
+            <ul v-if="store.cards.length > 0" class="cards">
                 <GameCards v-for="element in store.cards" :key="element.id" :card="element" />
-             
             </ul>
+            <div v-else style="font-weight: 600;">
+                Nessun risultato
+            </div>
         </div>
     </main>
 </template>
@@ -21,8 +23,8 @@ import Filters from './Filters.vue'
 
 export default {
     components: {
-      GameCards,
-      Filters
+        GameCards,
+        Filters
     },
 
     data() {
@@ -32,24 +34,23 @@ export default {
         }
     },
     computed: {
-      cardsGame() {
-        return this.store.cards
-      }
-    },  
+        cardsGame() {
+            return this.store.cards
+        }
+    },
 
     methods: {
         fetchCards() {
             const search = this.store.search
-
             axios
-                .get('https://db.ygoprodeck.com/api/v7/cardinfo.php?num=20&offset=0',{
-                params: {
-                fname: search,           
-            }})
-                .then((res) => {                
+                .get('https://db.ygoprodeck.com/api/v7/cardinfo.php?num=20&offset=0', {
+                    params: {
+                        fname: search,
+                    }
+                }).then((res) => {
                     this.store.cards = res.data.data
-                    console.log(res.data.data)
-                    
+                }).catch((error) => {
+                    this.store.cards = [];
                 })
         }
     },
@@ -57,20 +58,19 @@ export default {
         this.fetchCards()
     },
 }
-console.log(store.image)
 </script>
 
 <style lang="scss" scoped>
-
-.main{
+.main {
     background-image: url('../img/wallpaper.jpg');
     background-repeat: no-repeat;
     background-size: cover;
     padding: 80px 0;
 }
+
 .cards {
-  display: grid;
-  gap: 10px;
-  grid-template-columns: repeat(5,1fr);
+    display: grid;
+    gap: 10px;
+    grid-template-columns: repeat(5, 1fr);
 }
 </style>

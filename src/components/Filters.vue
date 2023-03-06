@@ -11,11 +11,9 @@
     export default {
       data() {
         return {
-          // search: '',
           store,
         }
-      }
-      
+      }      
     }
   </script>
   
