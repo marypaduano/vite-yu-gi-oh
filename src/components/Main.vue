@@ -1,5 +1,8 @@
 <template>
     <main class="main">
+    <div class="container">
+      <Filters @onSearch="fetchCards"/>
+    </div>
         <div class="container">
             <ul class="cards">                
                 <GameCards v-for="element in store.cards" :key="element.id" :card="element" />
@@ -14,10 +17,12 @@
 import axios from 'axios'
 import store from '../store'
 import GameCards from './GameCards.vue'
+import Filters from './Filters.vue'
 
 export default {
     components: {
-      GameCards
+      GameCards,
+      Filters
     },
 
     data() {
@@ -26,7 +31,6 @@ export default {
             store: store
         }
     },
-
     computed: {
       cardsGame() {
         return this.store.cards
@@ -35,8 +39,13 @@ export default {
 
     methods: {
         fetchCards() {
+            const search = this.store.search
+
             axios
-                .get('https://db.ygoprodeck.com/api/v7/cardinfo.php?num=20&offset=0')
+                .get('https://db.ygoprodeck.com/api/v7/cardinfo.php?num=20&offset=0',{
+                params: {
+                fname: search,           
+            }})
                 .then((res) => {                
                     this.store.cards = res.data.data
                     console.log(res.data.data)
